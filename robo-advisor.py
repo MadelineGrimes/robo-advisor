@@ -1,3 +1,21 @@
+import os
+from dotenv import load_dotenv
+import requests
+
+load_dotenv()
+
+ALPHA_VANTAGE_API_KEY = os.getenv("ALPHA_VANTAGE_API_KEY")
+
+
+
+symbol = "MSFT"
+request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={symbol}&apikey={ALPHA_VANTAGE_API_KEY}"
+
+response = requests.get(request_url)
+
+print(type(response))
+
+print(response.text)
 
 print("-------------------------")
 print("SELECTED SYMBOL: XYZ")
@@ -15,4 +33,3 @@ print("RECOMMENDATION REASON: TODO")
 print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
-
