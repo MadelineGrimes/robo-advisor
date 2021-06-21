@@ -1,21 +1,37 @@
 import os
 from dotenv import load_dotenv
+load_dotenv()
 import requests
 
-load_dotenv()
+import pandas as pd
+train = pd.read_table("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={symbol}&apikey={ALPHAVANTAGE_API_KEY}&datatype=csv")
+train.head()
+
+#Info Inputs
+
+print("Requesting some data...")
+
+#Note to self: Set up the logic BEFORE the API work! Plug this in last after the logic is verified to work. 
 
 ALPHAVANTAGE_API_KEY = os.getenv("ALPHAVANTAGE_API_KEY")
+symbol = input("Please enter a stock ticker")
 
+request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={symbol}&apikey={ALPHAVANTAGE_API_KEY}&datatype=csv"
+print("URL:", request_url)
 
-
-symbol = "MSFT"
-request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={symbol}&apikey={ALPHAVANTAGE_API_KEY}"
+if (symbol.isalpha) == False:
+    print("Sorry, that's an invalid symbol.")
+    exit()
 
 response = requests.get(request_url)
 
-print(type(response))
+#print(type(response))
+#print(response.status_code)
+#print(response.text)
 
-print(response.text)
+
+
+#Info Outputs
 
 print("-------------------------")
 print("SELECTED SYMBOL: XYZ")
