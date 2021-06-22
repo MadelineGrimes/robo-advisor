@@ -4,8 +4,14 @@ load_dotenv()
 import requests
 
 import pandas as pd
-train = pd.read_table("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={symbol}&apikey={ALPHAVANTAGE_API_KEY}&datatype=csv")
-train.head()
+data = pd.read_table("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={symbol}&apikey={ALPHAVANTAGE_API_KEY}&datatype=csv")
+
+df = pd.DataFrame(data, columns= ['Product', 'Price'])
+
+df.to_csv (r'C:\Users\madelinegrimes\Documents\GitHub\robo-advisor\export_dataframe.csv', index = False, header=True)
+
+print (df)
+
 
 #Info Inputs
 
